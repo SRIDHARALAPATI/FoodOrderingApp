@@ -1,3 +1,32 @@
-#heading{
-    color:green;
+body{
+    padding: 0px;
+    margin: 0px;;
 }
+
+.Header{
+    display: flex;
+    background-color: red;
+    justify-content: space-between;
+    max-height: 76px;;
+}
+.logo-img{
+
+    width:100px;
+    border-radius: 15px;;
+}
+.Nav-items{
+    padding: 0px 10px;
+}
+.Nav-items > ul{
+    display: flex;
+    list-style: none;
+}
+.Nav-items > ul>li{
+  padding: 10px;
+  font-size: 20px;
+}
+.Nav-items > ul>li:hover{
+    background-color: black;
+    color: white;
+  }
+
