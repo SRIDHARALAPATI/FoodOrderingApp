@@ -40,10 +40,29 @@ const HeaderComponent = () => {
   );
 };
 
+const RestaurantCard=()=>{
+  return(
+    <div className="res-card">
+      <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,h_1340/Lunch1_vlksgq"></img>
+      <h3>Kadai Restaurant</h3>
+  </div>);
+};
+const Body = () => {
+  return (
+    <div className="body-container">
+      <div className="Search"><h4>Search</h4></div>
+      <div className="card-container">
+      <RestaurantCard/>
+      </div>
+      
+    </div>
+  );
+};
 const AppyLayout=()=>{
 return(
 <div className="main-container">
 <HeaderComponent/>
+<Body/>
 </div>);
 };
 
