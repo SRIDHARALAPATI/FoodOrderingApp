@@ -1,3 +1,4 @@
+
 body{
     padding: 0px;
     margin: 0px;;
@@ -27,6 +28,7 @@ body{
 .Nav-items > ul>li:hover{
     background-color: black;
     color: white;
+    cursor: pointer;
   }
 
 .body-container{
@@ -34,17 +36,50 @@ body{
 }
 .card-container{
     border: 1px red Solid;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px;
+    
 }
+.res-card:hover
+{
+    cursor:pointer ;
+    box-shadow: 14px 4px 8px rgba(82, 68, 68, 0.1);
+    transform: scale(1.05);
+    background-color:cornsilk;
+}
+
 .res-card{
     width: 200px;
-    height: 300px;
+    height: 250px;
     background-color: #f0f0f0;
-    border: 1px solid black;
-     /* display: inline-block; */
-    /* margin: 15px;  */
+    margin: 15px;
     
-
+    
+    
 }
 .res-card>img{
-    width:150px ;
+    width: 200px;
+   height: 150px; 
+
+}
+.res-card>h4{
+    margin: 0px;
+}
+.res-name{
+    margin: 0px;
+}
+.rat-eta{
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;;
+}
+.rat-eta>h4{
+    margin: 0px;
+
+}
+.input{
+    width: 250px;
+    margin: 15px 15px;
+
 }
