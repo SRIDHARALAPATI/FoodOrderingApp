@@ -1,8 +1,9 @@
 import RestaurantCard from "./RestaurantCard";
-import restaurantList from "../../utils/mockData";
 import { useEffect, useState } from "react";
+import Shimmer from "./Shimmer";
+
 const Body = () => {
-  const [resdata, setresdata] = useState(restaurantList);
+  const [resdata, setresdata] = useState([]);
   useEffect(() => {
     getResData();
   }, []);
@@ -11,11 +12,16 @@ const Body = () => {
     const swiggy_api = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-    const swiggy_data= await swiggy_api.json();
+    const swiggy_data = await swiggy_api.json();
     console.log(swiggy_data);
-    setresdata(swiggy_data?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setresdata(
+      swiggy_data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
   };
-
+  if (resdata.length === 0) {
+    return <Shimmer/>;
+  }
   return (
     <div className="body-container">
       <div className="search">
