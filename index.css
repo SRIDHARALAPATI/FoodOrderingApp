@@ -90,3 +90,13 @@ width: 100%;
     height: 277px;
     
 }
+.login-out_btn{
+    cursor: pointer;
+    padding: 0px 15px;
+    
+}
+.login-out_btn:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }

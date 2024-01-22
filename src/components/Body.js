@@ -4,6 +4,9 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [resdata, setresdata] = useState([]);
+  const [searchRes, setSearchRes]=useState('');
+  console.log(searchRes);
+  
   useEffect(() => {
     getResData();
   }, []);
@@ -19,18 +22,22 @@ const Body = () => {
         ?.restaurants
     );
   };
-  if (resdata.length === 0) {
-    return <Shimmer/>;
-  }
-  return (
+  // conditional rendering
+  return resdata.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body-container">
       <div className="search">
         <input
           className="input"
           type="text"
-          placeholder="Search for restaurant and food"
+          placeholder="Search for restaurant and food" value={searchRes} onChange={(e)=>setSearchRes(e.target.value)}
         />
-        <button>Search</button>
+        <button onClick={()=>{
+          const resresult=resdata.filter((res)=>res.info.name.toLowerCase().includes(searchRes.toLowerCase()))
+          setresdata(resresult)
+          console.log(resresult)
+        }}>Search</button>
         <button
           className="filter"
           onClick={() => {
