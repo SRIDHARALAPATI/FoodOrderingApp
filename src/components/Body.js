@@ -4,9 +4,10 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [resdata, setresdata] = useState([]);
-  const [searchRes, setSearchRes]=useState('');
+  const [initialResData, setinitialResData] = useState([]);
+  const [searchRes, setSearchRes] = useState("");
   console.log(searchRes);
-  
+
   useEffect(() => {
     getResData();
   }, []);
@@ -17,10 +18,11 @@ const Body = () => {
     );
     const swiggy_data = await swiggy_api.json();
     console.log(swiggy_data);
-    setresdata(
+    const restaurants =
       swiggy_data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+        ?.restaurants;
+    setresdata(restaurants);
+    setinitialResData(restaurants);
   };
   // conditional rendering
   return resdata.length === 0 ? (
@@ -31,13 +33,25 @@ const Body = () => {
         <input
           className="input"
           type="text"
-          placeholder="Search for restaurant and food" value={searchRes} onChange={(e)=>setSearchRes(e.target.value)}
+          placeholder="Search for restaurant and food"
+          value={searchRes}
+          onChange={(e) => setSearchRes(e.target.value)}
         />
+        <button
+          onClick={() => {
+            const resresult = resdata.filter((res) =>
+              res.info.name.toLowerCase().includes(searchRes.toLowerCase())
+            );
+            setresdata(resresult);
+            console.log(resresult);
+          }}
+        >
+          Search
+        </button>
         <button onClick={()=>{
-          const resresult=resdata.filter((res)=>res.info.name.toLowerCase().includes(searchRes.toLowerCase()))
-          setresdata(resresult)
-          console.log(resresult)
-        }}>Search</button>
+            setSearchRes(''),
+            setresdata(initialResData);
+        }}>Clear</button>
         <button
           className="filter"
           onClick={() => {
