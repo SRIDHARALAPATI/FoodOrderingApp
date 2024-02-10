@@ -4,7 +4,7 @@ import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [resdata, setresdata] = useState([]);
-  const [initialResData, setinitialResData] = useState([]);
+  const [filteredResData, setFilteredResData] = useState([]);
   const [searchRes, setSearchRes] = useState("");
   console.log(searchRes);
 
@@ -14,7 +14,7 @@ const Body = () => {
 
   const getResData = async () => {
     const swiggy_api = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4400802&lng=78.3489168&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const swiggy_data = await swiggy_api.json();
     console.log(swiggy_data);
@@ -22,7 +22,7 @@ const Body = () => {
       swiggy_data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
     setresdata(restaurants);
-    setinitialResData(restaurants);
+    setFilteredResData(restaurants);
   };
   // conditional rendering
   return resdata.length === 0 ? (
@@ -42,28 +42,31 @@ const Body = () => {
             const resresult = resdata.filter((res) =>
               res.info.name.toLowerCase().includes(searchRes.toLowerCase())
             );
-            setresdata(resresult);
+            setFilteredResData(resresult);
             console.log(resresult);
           }}
         >
           Search
         </button>
-        <button onClick={()=>{
-            setSearchRes(''),
-            setresdata(initialResData);
-        }}>Clear</button>
+        <button
+          onClick={() => {
+            setSearchRes("");
+          }}
+        >
+          Clear
+        </button>
         <button
           className="filter"
           onClick={() => {
-            const filterres = resdata.filter((res) => res.info.avgRating > 4.0);
-            setresdata(filterres);
+            const filterres = filteredResData.filter((res) => res.info.avgRating > 4.0);
+            setFilteredResData(filterres);
           }}
         >
           Top Rated Restaurants
         </button>
       </div>
       <div className="card-container">
-        {resdata.map((resinfo) => (
+        {filteredResData.map((resinfo) => (
           <RestaurantCard key={resinfo.info.id} resdata={resinfo} />
         ))}
       </div>
